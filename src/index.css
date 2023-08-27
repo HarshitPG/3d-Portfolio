@@ -134,7 +134,7 @@ body {
   z-index: 1;
   overflow: hidden;
   transition: 0.42s ease-in-out;
-  animation: fadeIn 3.4s ease-in-out 15s forwards;
+  animation: fadeIn 3.4s ease-in-out 3s forwards;
   opacity: 0;
 }
 
