@@ -6,7 +6,7 @@ const Preloader = ({ onComplete }) => {
 
   useEffect(() => {
     // Simulate loading time (You can replace this with actual asset loading logic)
-    const loadingTime = 40000; // 3 seconds
+    const loadingTime = 10000; // 3 seconds
     const timer = setTimeout(() => {
       setLoaded(true);
     }, loadingTime);
