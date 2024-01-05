@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
-import { ScrollControls } from "@react-three/drei";
+import { Loader, ScrollControls } from "@react-three/drei";
 import { Suspense, useMemo } from "react";
 import { EffectComposer, Noise } from "@react-three/postprocessing";
 import { Overlay } from "./components/Overlay";
@@ -28,16 +28,16 @@ function App() {
         <Suspense fallback={null}>
           {/* ... */}
           <ScrollControls
-            page={play && !end ? 100 : 0}
-            damping={1}
+            page={play && !end ? 1 : 0}
+            damping={0.1}
             style={{
               top: "10px",
               left: "0px",
               bottom: "10px",
               right: "10px",
-              width: "auto",
-              height: "auto",
-              transition: "opacity 1.4s ease-in-ot",
+              width: "100vw",
+              height: "100vh",
+              animation: "fadeIn 2.4s ease-in-out 1.2s forwards",
               opacity: play ? 1 : 0,
             }}
           >
@@ -46,7 +46,8 @@ function App() {
           {effect}
         </Suspense>
       </Canvas>
-     <Overlay />
+      <Loader />
+      <Overlay />
     </>
   );
 }
