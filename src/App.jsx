@@ -46,7 +46,7 @@ function App() {
           {effect}
         </Suspense>
       </Canvas>
-      && <Overlay />
+     <Overlay />
     </>
   );
 }
