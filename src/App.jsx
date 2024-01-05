@@ -1,15 +1,12 @@
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
 import { ScrollControls } from "@react-three/drei";
-import { useMemo, useState } from "react";
+import { Suspense, useMemo } from "react";
 import { EffectComposer, Noise } from "@react-three/postprocessing";
 import { Overlay } from "./components/Overlay";
 import { usePlay } from "./components/contexts/Play";
-import Preloader from "./components/Preloader";
 
 function App() {
-  const [loadingComplete, setLoadingComplete] = useState(false);
-
   const { play, end } = usePlay();
   const effect = useMemo(
     () => (
@@ -20,21 +17,15 @@ function App() {
     []
   );
 
-  const handlePreloadingComplete = () => {
-    setLoadingComplete(true);
-  };
-
   return (
     <>
-      {!loadingComplete && <Preloader onComplete={handlePreloadingComplete} />}
-
-      {loadingComplete && (
-        <Canvas
-          camera={{
-            position: [0, 0, 5],
-            fov: 30,
-          }}
-        >
+      <Canvas
+        camera={{
+          position: [0, 0, 5],
+          fov: 30,
+        }}
+      >
+        <Suspense fallback={null}>
           {/* ... */}
           <ScrollControls
             page={play && !end ? 100 : 0}
@@ -53,10 +44,9 @@ function App() {
             <Experience />
           </ScrollControls>
           {effect}
-        </Canvas>
-      )}
-
-      {loadingComplete && <Overlay />}
+        </Suspense>
+      </Canvas>
+      && <Overlay />
     </>
   );
 }
